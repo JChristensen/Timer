@@ -60,7 +60,7 @@ int8_t Timer::after(unsigned long period, void (*callback)())
 int8_t Timer::oscillate(uint8_t pin, unsigned long period, uint8_t startingValue, int repeatCount)
 {
 	int8_t i = findFreeEventIndex();
-	if (i == -1) return -1;
+	if (i == NO_TIMER_AVAILABLE) return NO_TIMER_AVAILABLE;
 
 	_events[i].eventType = EVENT_OSCILLATE;
 	_events[i].pin = pin;
@@ -78,14 +78,35 @@ int8_t Timer::oscillate(uint8_t pin, unsigned long period, uint8_t startingValue
 	return oscillate(pin, period, startingValue, -1); // forever
 }
 
+/**
+ * This method will generate a pulse of !startingValue, occuring period after the
+ * call of this method and lasting for period. The Pin will be left in !startingValue.
+ */
 int8_t Timer::pulse(uint8_t pin, unsigned long period, uint8_t startingValue)
 {
 	return oscillate(pin, period, startingValue, 1); // once
 }
 
+/**
+ * This method will generate a pulse of startingValue, starting immediately and of
+ * length period. The pin will be left in the !startingValue state
+ */
+int8_t Timer::pulseImmediate(uint8_t pin, unsigned long period, uint8_t pulseValue)
+{
+	int8_t id(oscillate(pin, period, pulseValue, 1));
+	// now fix the repeat count
+	if (id >= 0 && id < MAX_NUMBER_OF_EVENTS) {
+		_events[id].repeatCount = 1;
+	}
+	return id;
+}
+
+
 void Timer::stop(int8_t id)
 {
-	_events[id].eventType = EVENT_NONE;
+	if (id >= 0 && id < MAX_NUMBER_OF_EVENTS) {
+		_events[id].eventType = EVENT_NONE;
+	}
 }
 
 void Timer::update(void)
@@ -108,5 +129,5 @@ int8_t Timer::findFreeEventIndex(void)
 			return i;
 		}
 	}
-	return -1;
+	return NO_TIMER_AVAILABLE;
 }
