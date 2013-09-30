@@ -20,3 +20,6 @@ Updated keywords.txt file to include all functions.
  o Added several comments
  o Added Timer::pulseImmediate(). pulseImmediate sets the pin to the specified value for the given
    duration. After the duration, the pin is set to !value.
+   
+1.2 by Jack Christensen
+ o Added "blink2" example illustrating flashing two LEDs at different rates.
