@@ -23,3 +23,8 @@ Updated keywords.txt file to include all functions.
    
 1.2 by Jack Christensen
  o Added "blink2" example illustrating flashing two LEDs at different rates.
+
+1.3 by Sandy Walsh
+ o Added a "context" parameter to callbacks. You can pass in the context
+   when the event is created and it will be sent back to callback when
+   called.

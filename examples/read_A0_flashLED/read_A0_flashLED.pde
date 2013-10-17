@@ -8,7 +8,7 @@ void setup()
   Serial.begin(9600);
   pinMode(pin, OUTPUT);
   t.oscillate(pin, 100, LOW);
-  t.every(1000, takeReading);
+  t.every(1000, takeReading, 0);
 }
 
 void loop()
@@ -16,7 +16,7 @@ void loop()
   t.update();
 }
 
-void takeReading()
+void takeReading(void* context)
 {
   Serial.println(analogRead(0));
 }
