@@ -33,7 +33,7 @@ Timer::Timer(void)
 {
 }
 
-int8_t Timer::every(unsigned long period, void (*callback)(), int repeatCount)
+int8_t Timer::every(unsigned long period, void (*callback)(void*), int repeatCount, void* context)
 {
 	int8_t i = findFreeEventIndex();
 	if (i == -1) return -1;
@@ -44,17 +44,18 @@ int8_t Timer::every(unsigned long period, void (*callback)(), int repeatCount)
 	_events[i].callback = callback;
 	_events[i].lastEventTime = millis();
 	_events[i].count = 0;
+	_events[i].context = context;
 	return i;
 }
 
-int8_t Timer::every(unsigned long period, void (*callback)())
+int8_t Timer::every(unsigned long period, void (*callback)(void*), void* context)
 {
-	return every(period, callback, -1); // - means forever
+	return every(period, callback, -1, context); // - means forever
 }
 
-int8_t Timer::after(unsigned long period, void (*callback)())
+int8_t Timer::after(unsigned long period, void (*callback)(void*), void* context)
 {
-	return every(period, callback, 1);
+	return every(period, callback, 1, context);
 }
 
 int8_t Timer::oscillate(uint8_t pin, unsigned long period, uint8_t startingValue, int repeatCount)
@@ -70,6 +71,8 @@ int8_t Timer::oscillate(uint8_t pin, unsigned long period, uint8_t startingValue
 	_events[i].repeatCount = repeatCount * 2; // full cycles not transitions
 	_events[i].lastEventTime = millis();
 	_events[i].count = 0;
+	_events[i].context = (void*)0;
+	_events[i].callback = (void*)0;
 	return i;
 }
 
