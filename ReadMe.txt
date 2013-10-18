@@ -27,4 +27,6 @@ Updated keywords.txt file to include all functions.
 1.3 by Sandy Walsh
  o Added a "context" parameter to callbacks. You can pass in the context
    when the event is created and it will be sent back to callback when
-   called.
+   called. If you don't have any context data you want to pass in (let's
+   say you're using separate callbacks for each timer), you can just
+   pass in 0 and ignore it in the callback.

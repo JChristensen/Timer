@@ -72,7 +72,7 @@ int8_t Timer::oscillate(uint8_t pin, unsigned long period, uint8_t startingValue
 	_events[i].lastEventTime = millis();
 	_events[i].count = 0;
 	_events[i].context = (void*)0;
-	_events[i].callback = (void*)0;
+	_events[i].callback = (void (*)(void*))0;
 	return i;
 }
 
