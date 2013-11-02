@@ -54,7 +54,7 @@ public:
    * length period. The pin will be left in the !pulseValue state
    */
   int8_t pulseImmediate(uint8_t pin, unsigned long period, uint8_t pulseValue);
-  void stop(int8_t id);
+  int8_t stop(int8_t id);
   void update(void);
 
 protected:
