@@ -31,30 +31,30 @@
 
 Event::Event(void)
 {
-	eventType = EVENT_NONE;
+    eventType = EVENT_NONE;
 }
 
 void Event::update(void)
 {
-	unsigned long now = millis();
-	if (now - lastEventTime >= period)
-	{
-		switch (eventType)
-		{
-			case EVENT_EVERY:
-				(*callback)(context);
-				break;
+    unsigned long now = millis();
+    if (now - lastEventTime >= period)
+    {
+        switch (eventType)
+        {
+            case EVENT_EVERY:
+                (*callback)(context);
+                break;
 
-			case EVENT_OSCILLATE:
-				pinState = ! pinState;
-				digitalWrite(pin, pinState);
-				break;
-		}
-		lastEventTime = now;
-		count++;
-	}
-	if (repeatCount > -1 && count >= repeatCount)
-	{
-		eventType = EVENT_NONE;
-	}
+            case EVENT_OSCILLATE:
+                pinState = ! pinState;
+                digitalWrite(pin, pinState);
+                break;
+        }
+        lastEventTime = now;
+        count++;
+    }
+    if (repeatCount > -1 && count >= repeatCount)
+    {
+        eventType = EVENT_NONE;
+    }
 }
