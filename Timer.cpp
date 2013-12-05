@@ -36,7 +36,7 @@ Timer::Timer(void)
 int8_t Timer::every(unsigned long period, void (*callback)(void*), int repeatCount, void* context)
 {
     int8_t i = findFreeEventIndex();
-    if (i == -1) return -1;
+    if (i == NO_TIMER_AVAILABLE) return NO_TIMER_AVAILABLE;
 
     _events[i].eventType = EVENT_EVERY;
     _events[i].period = period;

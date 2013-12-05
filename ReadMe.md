@@ -256,7 +256,7 @@ Changed data types of variables and functions:
 ####2.0 by Sandy Walsh
 - Added a "context" parameter to callbacks. You can pass in the context when the event is created and it will be sent back to callback when called. If you don't have any context data you want to pass in (let's say you're using separate callbacks for each timer), you can just pass in 0 and ignore it in the callback.
    
-####2.1 by ThoMo
+####2.1 by Thomas Mohaupt
 - Changed the stop() method to return TIMER_NOT_AN_EVENT when it is given a valid timer event ID.  Given an invalid (out of bounds) ID, it simply returns the same ID that it was given.
 - Converted the ReadMe file to Markdown, added examples, reference, etc. from Dr. Monk's site. *[jc]*.
 - Minor cosmetic editing, tabs to spaces *[jc]*.
