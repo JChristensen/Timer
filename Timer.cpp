@@ -115,11 +115,12 @@ int8_t Timer::stop(int8_t id)
 
 void Timer::update(void)
 {
+    unsigned long now = millis();
     for (int8_t i = 0; i < MAX_NUMBER_OF_EVENTS; i++)
     {
         if (_events[i].eventType != EVENT_NONE)
         {
-            _events[i].update();
+            _events[i].update(now);
         }
     }
 }
