@@ -34,9 +34,8 @@ Event::Event(void)
 	eventType = EVENT_NONE;
 }
 
-void Event::update(void)
+void Event::update(unsigned long now)
 {
-	unsigned long now = millis();
 	if (now - lastEventTime >= period)
 	{
 		switch (eventType)
