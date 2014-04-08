@@ -34,6 +34,7 @@ class Event
 
 public:
   Event(void);
+  void update(void);
   void update(unsigned long now);
   int8_t eventType;
   unsigned long period;
