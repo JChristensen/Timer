@@ -1,4 +1,4 @@
-#Arduino Timer Library
+# Arduino Timer Library
 ReadMe file for version 2.0  
 https://github.com/JChristensen/Timer
 
@@ -6,7 +6,7 @@ This library was originally developed by Dr. Simon Monk to avoid problems that a
 
 The library does not interfere with the built-in timers, it just uses `millis()` in a basic type of scheduler to decide when something needs doing.
 
-##Examples
+## Examples
 
 The Arduino `delay()` function is both a blessing and a curse.  It's great for showing beginners how to make an LED flash.  But as soon as you get more complex and start slowing down your `loop()` function you will run into problems.
 
@@ -133,104 +133,104 @@ You can attach up to 10 events to a timer.
 
 Note that the callback functions have a "context" parameter.  The context value is specified when the event is created and it will be sent to callback function when the timer fires. The context is a void pointer, so it can be cast to any other data type.  Its use is optional, if you don't need it, just code `(void*)0` as in the above examples, but be sure that the callback function definitions have it in their argument list, i.e. `(void *context)`.
 
-##Installation
+## Installation
 
 As with all libraries, unzip the file into the *libraries* folder in your Arduino sketchbook directory, which will be something like *My Documents\Arduino\sketchbook* on Windows, *Documents/Arduino/sketchbook* on Mac etc.  If this is the first library you have installed, you will need to create a directory there called *libraries*.
 
 The Timer library is compatible with both Arduino 1.0+ and earlier versions.
 
-##Reference
+## Reference
 
-###every();
-#####Description
+### every();
+##### Description
 Runs the *callback* function every *period* milliseconds. Optionally stops after *repeatCount* times.
-#####Syntax
+##### Syntax
 `t.every(period, callback, context);`  
 `t.every(period, callback, repeatCount, context);`
-#####Parameters
+##### Parameters
 ***period:*** How often to run the callback function, in milliseconds *(unsigned long)*  
 ***callback:*** The name of the callback function which is called when the timer event fires *(function pointer)*  
 ***repeatCount:*** The number of times to run the callback function *(int, optional)*  
 ***context:*** Context value to be passed to the callback function *(void pointer)*  
-#####Returns
+##### Returns
 The ID of the Timer event *(int8_t or char)*
 
-###after();
-#####Description
+### after();
+##### Description
 Run the *callback* function once, after *period* milliseconds.
-#####Syntax
+##### Syntax
 `t.after(period, callback, context);`
-#####Parameters
+##### Parameters
 ***period:*** How long to wait before running the callback function, in milliseconds *(unsigned long)*  
 ***callback:*** The name of the callback function which is called when the timer event fires *(function pointer)*  
 ***context:*** Context value to be passed to the callback function *(void pointer)*  
-#####Returns
+##### Returns
 The ID of the Timer event *(int8_t or char)*
 
-###oscillate();
-#####Description
+### oscillate();
+##### Description
 Toggle the state of the digital output *pin* every *period* milliseconds. The pin's starting value is specified by *startingValue*, which should be HIGH or LOW. Optionally stops after *repeatCount* times.
-#####Syntax
+##### Syntax
 `t.oscillate(pin, period, startingValue);`  
 `t.oscillate(pin, period, startingValue, repeatCount);`  
-#####Parameters
+##### Parameters
 ***pin:*** The number of the pin to oscillate *(uint8_t or byte)*  
 ***period:*** How often to toggle the pin, in milliseconds *(unsigned long)*  
 ***startingValue:*** HIGH or LOW, the state at which the pin will start *(uint8_t or byte)*  
 ***repeatCount:*** Optional number of toggles to stop after *(int)*  
-#####Returns
+##### Returns
 The ID of the Timer event *(int8_t or char)*
 
-###pulse();
-#####Description
+### pulse();
+##### Description
 Generates a pulse of *!startingValue*, occuring *period* after the call to this method and lasting for *period*. The *pin* will be left in *!startingValue* state.
-#####Syntax
+##### Syntax
 `t.pulse(pin, period, startingValue);`
-#####Parameters
+##### Parameters
 ***pin:*** The number of the pin to pulse *(uint8_t or byte)*  
 ***period:*** The pulse period in milliseconds *(unsigned long)*  
 ***startingValue:*** HIGH or LOW, the state at which the pin will start *(uint8_t or byte)*  
-#####Returns
+##### Returns
 The ID of the Timer event *(int8_t or char)*
 
-###pulseImmediate();
-#####Description
+### pulseImmediate();
+##### Description
 Generates a pulse of *startingValue*, which begins immediately and lasts for *period*. The *pin* will be left in the *!startingValue* state.
-#####Syntax
+##### Syntax
 `t.pulseImmediate(pin, period, pulseValue);`
-#####Parameters
+##### Parameters
 ***pin:*** The number of the pin to pulse *(uint8_t or byte)*  
 ***period:*** The pulse period in milliseconds *(unsigned long)*  
 ***startingValue:*** HIGH or LOW, the state at which the pulse will start *(uint8_t or byte)*  
-#####Returns
+##### Returns
 The ID of the Timer event *(int8_t or char)*
 
-###stop();
-#####Description
+### stop();
+##### Description
 Stops the given timer event.
-#####Syntax
+##### Syntax
 `t.stop(timerID);`
-#####Parameters
+##### Parameters
 ***timerID:*** The number of the timer event to be stopped, as returned previously by one of the other functions, e.g. `every()`, `after()`, `oscillate()`, etc.
-#####Returns
+##### Returns
 If a valid *timerID* is given, returns TIMER_NOT_AN_EVENT to indicate that the timer was successfully stopped.  By default, the library supports up to 10 events per timer; the valid range is therefore 0-9.  If a value outside this range is given, that same value is returned.
 
-###update();
-#####Description
+### update();
+##### Description
 Must be called from `loop()`.  This will service all the events associated with the timer.
-#####Syntax
+##### Syntax
 `t.update();`
-#####Parameters
+##### Parameters
 None.
-#####Returns
+##### Returns
 None.
 
-##Revision History
+## Revision History
 
-####1.0 by Simon Monk
+#### 1.0 by Simon Monk
 - Library as downloaded 02Feb2012 22:55 UTC from http://srmonk.blogspot.com/2012/01/arduino-timer-library.html
 
-####1.1 by Jack Christensen
+#### 1.1 by Jack Christensen
 Changed data types of variables and functions:
 - event types and indexes changed from int to int8_t.
 - periods and durations changed from long to unsigned long.
@@ -240,7 +240,7 @@ Changed data types of variables and functions:
 - changed test in Event::update() to use subtraction to avoid rollover issues.
 - Updated keywords.txt file to include all functions.
 
-####1.2 by Damian Philipp
+#### 1.2 by Damian Philipp
 - Added a range check to Timer::stop() to avoid memory corruption.
 - Added constants to <Timer.h>: 
   - NO_TIMER_AVAILABLE: Signals that while an event was to be queued, no free timer could be found.
@@ -249,14 +249,14 @@ Changed data types of variables and functions:
 - Added several comments
 - Added Timer::pulseImmediate(). pulseImmediate sets the pin to the specified value for the given duration. After the duration, the pin is set to !value.
    
-####1.3 by Jack Christensen
+#### 1.3 by Jack Christensen
 - Added "blink2" example illustrating flashing two LEDs at different rates.
 - 19Oct2013: This is the last v1.x release. It will continue to be available on GitHub as a branch named v1.3. Future development will continue with Sandy Walsh's v2.0 which can pass context (timer ID, etc.) to the callback functions.
    
-####2.0 by Sandy Walsh
+#### 2.0 by Sandy Walsh
 - Added a "context" parameter to callbacks. You can pass in the context when the event is created and it will be sent back to callback when called. If you don't have any context data you want to pass in (let's say you're using separate callbacks for each timer), you can just pass in 0 and ignore it in the callback.
    
-####2.1 by Thomas Mohaupt
+#### 2.1 by Thomas Mohaupt
 - Changed the stop() method to return TIMER_NOT_AN_EVENT when it is given a valid timer event ID.  Given an invalid (out of bounds) ID, it simply returns the same ID that it was given.
 - Converted the ReadMe file to Markdown, added examples, reference, etc. from Dr. Monk's site. *[jc]*.
 - Minor cosmetic editing, tabs to spaces *[jc]*.
